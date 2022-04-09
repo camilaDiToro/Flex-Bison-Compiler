@@ -19,6 +19,7 @@ digit			[0-9]
 endline			\n
 whitespace		[ \f\n\r\t\v]
 
+
 %%
 
 "+"											{ return ADD; }
@@ -28,6 +29,10 @@ whitespace		[ \f\n\r\t\v]
 
 "("											{ return OPEN_PARENTHESIS; }
 ")"											{ return CLOSE_PARENTHESIS; }
+"{"                                         { return OPEN_BRAC; }
+"}"                                         { return CLOSE_BRAC; }
+"["                                         { return OPEN_BRAC; }
+"]"                                         { return CLOSE_BRAC; }
 
 {digit}+									{ return IntegerPatternAction(yytext); }
 
