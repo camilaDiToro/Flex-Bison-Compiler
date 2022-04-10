@@ -20,7 +20,8 @@ void yyerror(const char * string) {
 }
 
 int ProgramGrammarAction(const int value) {
-	LogDebug("ProgramGrammarAction(%d)", value);
+	//LogDebug("ProgramGrammarAction(%d)", value);
+	LogDebug("ProgramGrammarAction()");
 	state.succeed = true;
 	state.result = value;
 	return value;
@@ -64,4 +65,26 @@ int ConstantFactorGrammarAction(const int value) {
 int IntegerConstantGrammarAction(const int value) {
 	LogDebug("IntegerConstantGrammarAction(%d)", value);
 	return value;
+}
+
+void StringGrammarAction(){
+	LogDebug("StringGrammarAction()");
+}
+void EmptyStringGrammarAction(){
+ 	LogDebug("EmptyStringGrammarAction()");
+}
+
+void CharsBodyStringGrammarAction() {
+	LogDebug("CharsBodyStringGrammarAction()");
+} 
+void IntegerBodyStringGrammarAction(){
+	LogDebug("IntegerBodyStringGrammarAction()");
+}
+
+void ConcatCharsBodyStringGrammarAction(){
+	LogDebug("ConcatCharsBodyStringGrammarAction()");
+}
+
+void ConcatIntegerBodyStringGrammarAction(){
+	LogDebug("ConcatIntegerBodyStringGrammarAction()");
 }

@@ -10,10 +10,13 @@
 %token MUL
 %token DIV
 
+%token QUOTE
+
 %token OPEN_PARENTHESIS
 %token CLOSE_PARENTHESIS
 
 %token INTEGER
+%token CHARS
 
 // Reglas de asociatividad y precedencia (de menor a mayor):
 %left ADD SUB
@@ -21,7 +24,7 @@
 
 %%
 
-program: expression												{ $$ = ProgramGrammarAction($1); }
+/*program: expression												{ $$ = ProgramGrammarAction($1); }
 	;
 
 expression: expression ADD expression							{ $$ = AdditionExpressionGrammarAction($1, $3); }
@@ -36,6 +39,18 @@ factor: OPEN_PARENTHESIS expression CLOSE_PARENTHESIS			{ $$ = ExpressionFactorG
 	;
 
 constant: INTEGER												{ $$ = IntegerConstantGrammarAction($1); }
+	;*/
+
+program: string													{ $$ = ProgramGrammarAction($1); }
 	;
 
+string: QUOTE body_string QUOTE 								{StringGrammarAction(); }
+	| QUOTE QUOTE												{EmptyStringGrammarAction(); }
+	;
+
+body_string: CHARS												{ CharsBodyStringGrammarAction(); }
+	| INTEGER 													{ IntegerBodyStringGrammarAction(); }
+	| body_string CHARS											{ ConcatCharsBodyStringGrammarAction(); }
+	| body_string INTEGER										{ ConcatIntegerBodyStringGrammarAction(); }
+	;
 %%

@@ -17,6 +17,7 @@
 crlf			\r\n
 digit			[0-9]
 endline			\n
+character       [a-z]
 whitespace		[ \f\n\r\t\v]
 
 
@@ -29,12 +30,13 @@ whitespace		[ \f\n\r\t\v]
 
 "("											{ return OPEN_PARENTHESIS; }
 ")"											{ return CLOSE_PARENTHESIS; }
-"{"                                         { return OPEN_BRAC; }
-"}"                                         { return CLOSE_BRAC; }
-"["                                         { return OPEN_BRAC; }
-"]"                                         { return CLOSE_BRAC; }
+
+"\""                                        { return QuotePatternAction(yytext);  }
+"\'"                                        { return QuotePatternAction(yytext);  }
 
 {digit}+									{ return IntegerPatternAction(yytext); }
+
+{character}+                                { return StringPatternAction(yytext); }
 
 {whitespace}								{ IgnoredPatternAction(yytext); }
 

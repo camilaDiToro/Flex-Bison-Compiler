@@ -24,12 +24,16 @@ typedef enum TokenID {
 	MUL,
 	DIV,
 
+	// Tokens de JSON
+	QUOTE,
+
 	// Paréntesis.
 	OPEN_PARENTHESIS,
 	CLOSE_PARENTHESIS,
 
 	// Tipos de dato.
-	INTEGER
+	INTEGER,
+	CHARS
 } TokenID;
 
 /**
@@ -44,5 +48,9 @@ TokenID IntegerPatternAction(const char * lexeme);
 void IgnoredPatternAction(const char * lexeme);
 
 TokenID UnknownPatternAction(const char * lexeme);
+
+TokenID StringPatternAction(const char * lexeme);
+
+TokenID QuotePatternAction(const char * lexeme);
 
 #endif

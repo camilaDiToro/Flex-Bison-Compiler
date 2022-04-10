@@ -27,4 +27,14 @@ int ConstantFactorGrammarAction(const int value);
 // Constantes.
 int IntegerConstantGrammarAction(const int value);
 
+//String
+void StringGrammarAction();
+void EmptyStringGrammarAction();
+
+// String body 
+void CharsBodyStringGrammarAction(); 
+void IntegerBodyStringGrammarAction(); 
+void ConcatCharsBodyStringGrammarAction();
+void ConcatIntegerBodyStringGrammarAction();
+
 #endif
