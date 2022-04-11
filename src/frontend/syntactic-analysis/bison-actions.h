@@ -13,6 +13,9 @@
 // Programa.
 int ProgramGrammarAction(const int value);
 
+// Expresion Result.
+void ExpressionResultGrammarAction();
+
 // Expresión.
 int AdditionExpressionGrammarAction(const int leftValue, const int rightValue);
 int SubtractionExpressionGrammarAction(const int leftValue, const int rightValue);
@@ -34,7 +37,9 @@ void EmptyStringGrammarAction();
 // String body 
 void CharsBodyStringGrammarAction(); 
 void IntegerBodyStringGrammarAction(); 
+void ExpressionResultBodyStringGrammarAction();
 void ConcatCharsBodyStringGrammarAction();
 void ConcatIntegerBodyStringGrammarAction();
+void ConcatExpressionResultBodyStringGrammarAction();
 
 #endif

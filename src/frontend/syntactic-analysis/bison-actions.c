@@ -57,6 +57,10 @@ int ExpressionFactorGrammarAction(const int value) {
 	return value;
 }
 
+void ExpressionResultGrammarAction(){
+	LogDebug("ExpressionResultGrammarAction()");
+}
+
 int ConstantFactorGrammarAction(const int value) {
 	LogDebug("ConstantFactorGrammarAction(%d)", value);
 	return value;
@@ -77,9 +81,15 @@ void EmptyStringGrammarAction(){
 void CharsBodyStringGrammarAction() {
 	LogDebug("CharsBodyStringGrammarAction()");
 } 
+
 void IntegerBodyStringGrammarAction(){
 	LogDebug("IntegerBodyStringGrammarAction()");
 }
+
+void ExpressionResultBodyStringGrammarAction(){
+	LogDebug("ExpressionResultBodyStringGrammarAction()");
+}
+
 
 void ConcatCharsBodyStringGrammarAction(){
 	LogDebug("ConcatCharsBodyStringGrammarAction()");
@@ -87,4 +97,8 @@ void ConcatCharsBodyStringGrammarAction(){
 
 void ConcatIntegerBodyStringGrammarAction(){
 	LogDebug("ConcatIntegerBodyStringGrammarAction()");
+}
+
+void ConcatExpressionResultBodyStringGrammarAction(){
+	LogDebug("ConcatExpressionResultBodyStringGrammarAction()");
 }

@@ -24,12 +24,22 @@ typedef enum TokenID {
 	MUL,
 	DIV,
 
+	// MISCELANEO 
+
+
 	// Tokens de JSON
 	QUOTE,
+	DOLLAR,
+	COM, 
+	TPOINTS, 
 
 	// Paréntesis.
 	OPEN_PARENTHESIS,
 	CLOSE_PARENTHESIS,
+	OPEN_CURL,
+	CLOSE_CURL,
+	OPEN_BRA,
+	CLOSE_BRA,
 
 	// Tipos de dato.
 	INTEGER,

@@ -17,11 +17,16 @@
 crlf			\r\n
 digit			[0-9]
 endline			\n
-character       [a-z]
+character       [a-zA-Z] 
 whitespace		[ \f\n\r\t\v]
 
 
 %%
+
+
+"$"                                         { return DOLLAR; }
+","                                         { return COM; }
+":"                                         { return TPOINTS; }
 
 "+"											{ return ADD; }
 "-"											{ return SUB; }
@@ -30,6 +35,10 @@ whitespace		[ \f\n\r\t\v]
 
 "("											{ return OPEN_PARENTHESIS; }
 ")"											{ return CLOSE_PARENTHESIS; }
+"{"											{ return OPEN_CURL; }
+"}"											{ return CLOSE_CURL; }
+"["                                         { return OPEN_BRA; }
+"]"                                         { return CLOSE_BRA; }
 
 "\""                                        { return QuotePatternAction(yytext);  }
 "\'"                                        { return QuotePatternAction(yytext);  }
