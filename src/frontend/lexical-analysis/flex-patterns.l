@@ -17,21 +17,27 @@
 crlf			\r\n
 digit			[0-9]
 endline			\n
-character       [a-zA-Z] 
+character       [a-zA-Z0-9]|@|-
 whitespace		[ \f\n\r\t\v]
+
+%s STRING
+%s MATH
 
 
 %%
 
+<STRING>"${"                                {BEGIN(MATH); return StartMathAction(yytext);}
+<MATH>"}"                                   {BEGIN(STRING); return EndMathAction(yytext);}
 
 "$"                                         { return DOLLAR; }
 ","                                         { return COM; }
 ":"                                         { return TPOINTS; }
+"@"                                         { return AT_SIGN; }
 
-"+"											{ return ADD; }
-"-"											{ return SUB; }
-"*"											{ return MUL; }
-"/"											{ return DIV; }
+"+"									        { return ADD; }
+"-"									        { return SUB; }
+"*"									        { return MUL; }
+"/"									        { return DIV; }
 
 "("											{ return OPEN_PARENTHESIS; }
 ")"											{ return CLOSE_PARENTHESIS; }
@@ -40,14 +46,17 @@ whitespace		[ \f\n\r\t\v]
 "["                                         { return OPEN_BRA; }
 "]"                                         { return CLOSE_BRA; }
 
-"\""                                        { return QuotePatternAction(yytext);  }
 "\'"                                        { return QuotePatternAction(yytext);  }
 
-{digit}+									{ return IntegerPatternAction(yytext); }
+<INITIAL>"\""                               { BEGIN(STRING); return StartStringAction(yytext);  }
+<STRING>"\""                                { BEGIN(INITIAL); return EndStringAction(yytext);  }
 
-{character}+                                { return StringPatternAction(yytext); }
 
-{whitespace}								{ IgnoredPatternAction(yytext); }
+<MATH>{digit}+								{ return IntegerPatternAction(yytext); }
+
+<STRING>{character}+                        { return StringPatternAction(yytext); }
+
+{whitespace}							    { IgnoredPatternAction(yytext); }
 
 .											{ return UnknownPatternAction(yytext); }
 

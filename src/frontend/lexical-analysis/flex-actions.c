@@ -30,3 +30,23 @@ TokenID QuotePatternAction(const char * lexeme) {
 	LogDebug("QuotePatternAction: '%s'.", lexeme);
 	return QUOTE;
 }
+
+TokenID StartStringAction(const char * lexeme){
+	LogDebug("StartStringAction: '%s'.", lexeme);
+	return QUOTE;
+}
+
+TokenID EndStringAction(const char * lexeme){
+	LogDebug("EndStringAction: '%s'.", lexeme);
+	return QUOTE;
+}
+
+TokenID StartMathAction(const char * lexeme){
+	LogDebug("StartMathAction: '%s'.", lexeme);
+	return START_MATH;
+}
+
+TokenID EndMathAction(const char * lexeme){
+	LogDebug("EndMathAction: '%s'.", lexeme);
+	return CLOSE_CURL;
+}

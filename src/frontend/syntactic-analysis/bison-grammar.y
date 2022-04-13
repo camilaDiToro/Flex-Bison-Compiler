@@ -14,6 +14,7 @@
 %token DOLLAR
 %token COM
 %token TPOINTS
+%token AT_SIGN
 
 %token OPEN_PARENTHESIS
 %token CLOSE_PARENTHESIS
@@ -24,6 +25,8 @@
 
 %token INTEGER
 %token CHARS
+
+%token START_MATH
 
 // Reglas de asociatividad y precedencia (de menor a mayor):
 %left ADD SUB
@@ -70,7 +73,7 @@ string_body: CHARS												{ CharsBodyStringGrammarAction(); }
 	| string_body expression_result								{ ConcatExpressionResultBodyStringGrammarAction(); }
 	;
 
-expression_result:	DOLLAR OPEN_CURL expression CLOSE_CURL      { ExpressionResultGrammarAction(); }
+expression_result:	START_MATH expression CLOSE_CURL      { ExpressionResultGrammarAction(); }
 
 
 expression: expression ADD expression							{ $$ = AdditionExpressionGrammarAction($1, $3); }

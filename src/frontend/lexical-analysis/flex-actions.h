@@ -32,6 +32,7 @@ typedef enum TokenID {
 	DOLLAR,
 	COM, 
 	TPOINTS, 
+	AT_SIGN,
 
 	// Paréntesis.
 	OPEN_PARENTHESIS,
@@ -43,7 +44,11 @@ typedef enum TokenID {
 
 	// Tipos de dato.
 	INTEGER,
-	CHARS
+	CHARS,
+
+	// Comienzo o finalizacion de contextos
+	START_MATH
+
 } TokenID;
 
 /**
@@ -62,5 +67,14 @@ TokenID UnknownPatternAction(const char * lexeme);
 TokenID StringPatternAction(const char * lexeme);
 
 TokenID QuotePatternAction(const char * lexeme);
+
+TokenID StartStringAction(const char * lexeme);
+
+TokenID EndStringAction(const char * lexeme);
+
+TokenID StartMathAction(const char * lexeme);
+
+TokenID EndMathAction(const char * lexeme);
+
 
 #endif
