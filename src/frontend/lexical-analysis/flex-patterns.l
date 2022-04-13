@@ -19,7 +19,7 @@ digit			[0-9]
 endline			\n
 alpha           [a-zA-Z]
 alphanumeric    [a-zA-Z0-9]
-character       [a-zA-Z0-9]|@|-|\+|\*|\/|\'
+character       [a-zA-Z0-9]|@|-|\+|\*|\/|\'|\{|\}|\[|\]
 whitespace		[ \f\n\r\t\v]
 
 %s STRING

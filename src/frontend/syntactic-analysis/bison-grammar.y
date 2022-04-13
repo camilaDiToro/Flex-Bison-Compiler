@@ -38,7 +38,7 @@
 program: json													{ $$ = ProgramGrammarAction($1); }
 	; 						
 
-json: string													{ printf("JSON TYPE: Simple string: %s\n", $1); }
+json: string													{ printf("JSON TYPE: Simple string \n"); }
 	| array														{ printf("JSON TYPE: Array\n"); }
 	| OPEN_CURL json_body CLOSE_CURL 							{ printf("JSON TYPE: Full Json\n"); }												
 	;
