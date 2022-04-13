@@ -56,10 +56,8 @@ array: OPEN_BRA CLOSE_BRA										{ printf("PARSED EMPTY ARRAY\n"); }
 	;
 
 
-array_body: string                                          	{ printf("body array string\n"); }
-	| array														{ printf("body array array\n"); } 
-	| array_body COM string										{ printf("body array concat string\n"); }
-	| array_body COM array                                      { printf("body array concat array\n"); }
+array_body: json                                          		{ printf("body array json\n"); }
+	| array_body COM json                                       { printf("body array concat json\n"); }
 	;
 
 string: QUOTE string_body QUOTE 								{ StringGrammarAction(); }
@@ -90,6 +88,7 @@ factor: OPEN_PARENTHESIS expression CLOSE_PARENTHESIS			{ $$ = ExpressionFactorG
 	;
 
 variable: VAR													{ $$ = VariableGrammarAction(); }
+	| variable OPEN_BRA INTEGER CLOSE_BRA						{ $$ = VariableSubscriptGrammarAction(); }
 	;
 
 constant: INTEGER												{ $$ = IntegerConstantGrammarAction($1); }

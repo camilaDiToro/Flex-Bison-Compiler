@@ -76,6 +76,11 @@ int VariableGrammarAction(){
 	return 1;
 }
 
+int VariableSubscriptGrammarAction(){
+	LogDebug("VariableSubscriptGrammarAction");
+	return 1;
+}
+
 int IntegerConstantGrammarAction(const int value) {
 	LogDebug("IntegerConstantGrammarAction(%d)", value);
 	return value;

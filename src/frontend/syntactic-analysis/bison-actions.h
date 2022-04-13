@@ -30,6 +30,7 @@ int VariableFactorGrammarAction();
 
 // Variables.
 int VariableGrammarAction();
+int VariableSubscriptGrammarAction();
 
 // Constantes.
 int IntegerConstantGrammarAction(const int value);

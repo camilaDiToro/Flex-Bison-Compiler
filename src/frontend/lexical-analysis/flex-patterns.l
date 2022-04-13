@@ -19,7 +19,7 @@ digit			[0-9]
 endline			\n
 alpha           [a-zA-Z]
 alphanumeric    [a-zA-Z0-9]
-character       [a-zA-Z0-9]|@|-|\+|\*|\/
+character       [a-zA-Z0-9]|@|-|\+|\*|\/|\'
 whitespace		[ \f\n\r\t\v]
 
 %s STRING
@@ -38,10 +38,10 @@ whitespace		[ \f\n\r\t\v]
 <MATH>"-"									{ return SUB; }
 <MATH>"*"									{ return MUL; }
 <MATH>"/"									{ return DIV; }
-<MATH>{alpha}{alphanumeric}*                { return VarMathPatternAction(yytext);}
+<MATH>{alpha}{alphanumeric}*                { return VarMathPatternAction(yytext); }
 
-<STRING>","                                 {return StringPatternAction(yytext); }
-","                                         {return COM;}
+<STRING>","                                 { return StringPatternAction(yytext); }
+","                                         { return COM; }
 
 "("											{ return OPEN_PARENTHESIS; }
 ")"											{ return CLOSE_PARENTHESIS; }
@@ -49,8 +49,6 @@ whitespace		[ \f\n\r\t\v]
 "}"											{ return CLOSE_CURL; }
 "["                                         { return OPEN_BRA; }
 "]"                                         { return CLOSE_BRA; }
-
-"\'"                                        { return QuotePatternAction(yytext);  }
 
 <INITIAL>"\""                               { BEGIN(STRING); return StartStringAction(yytext);  }
 <STRING>"\""                                { BEGIN(INITIAL); return EndStringAction(yytext);  }
