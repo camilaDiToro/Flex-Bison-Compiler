@@ -26,6 +26,10 @@ int FactorExpressionGrammarAction(const int value);
 // Factores.
 int ExpressionFactorGrammarAction(const int value);
 int ConstantFactorGrammarAction(const int value);
+int VariableFactorGrammarAction();
+
+// Variables.
+int VariableGrammarAction();
 
 // Constantes.
 int IntegerConstantGrammarAction(const int value);

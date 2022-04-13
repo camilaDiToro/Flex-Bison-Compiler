@@ -9,6 +9,7 @@
 %token SUB
 %token MUL
 %token DIV
+%token VAR
 
 %token QUOTE
 %token DOLLAR
@@ -73,7 +74,7 @@ string_body: CHARS												{ CharsBodyStringGrammarAction(); }
 	| string_body expression_result								{ ConcatExpressionResultBodyStringGrammarAction(); }
 	;
 
-expression_result:	START_MATH expression CLOSE_CURL      { ExpressionResultGrammarAction(); }
+expression_result:	START_MATH expression CLOSE_CURL      		{ ExpressionResultGrammarAction(); }
 
 
 expression: expression ADD expression							{ $$ = AdditionExpressionGrammarAction($1, $3); }
@@ -85,6 +86,10 @@ expression: expression ADD expression							{ $$ = AdditionExpressionGrammarActi
 
 factor: OPEN_PARENTHESIS expression CLOSE_PARENTHESIS			{ $$ = ExpressionFactorGrammarAction($2); }
 	| constant													{ $$ = ConstantFactorGrammarAction($1); }
+	| variable													{ $$ = VariableFactorGrammarAction(); }
+	;
+
+variable: VAR													{ $$ = VariableGrammarAction(); }
 	;
 
 constant: INTEGER												{ $$ = IntegerConstantGrammarAction($1); }

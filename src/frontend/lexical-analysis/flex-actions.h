@@ -23,6 +23,7 @@ typedef enum TokenID {
 	SUB,
 	MUL,
 	DIV,
+	VAR,
 
 	// MISCELANEO 
 
@@ -75,6 +76,8 @@ TokenID EndStringAction(const char * lexeme);
 TokenID StartMathAction(const char * lexeme);
 
 TokenID EndMathAction(const char * lexeme);
+
+TokenID VarMathPatternAction(const char * lexeme);
 
 
 #endif

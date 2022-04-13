@@ -66,6 +66,16 @@ int ConstantFactorGrammarAction(const int value) {
 	return value;
 }
 
+int VariableFactorGrammarAction(){
+	LogDebug("VariableFactorGrammarAction");
+	return 1;
+}
+
+int VariableGrammarAction(){
+	LogDebug("VariableGrammarAction");
+	return 1;
+}
+
 int IntegerConstantGrammarAction(const int value) {
 	LogDebug("IntegerConstantGrammarAction(%d)", value);
 	return value;
