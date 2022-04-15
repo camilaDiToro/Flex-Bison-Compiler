@@ -43,6 +43,7 @@ typedef enum TokenID {
 	TAG_FOR,
 	TAG_VAR,
 	TAG_IN,
+	TAG_READ,
 
 	// Tokens de JSON
 	QUOTE,

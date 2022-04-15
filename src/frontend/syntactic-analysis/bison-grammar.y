@@ -27,6 +27,7 @@
 %token TAG_FOR
 %token TAG_VAR
 %token TAG_IN
+%token TAG_READ
 
 %token QUOTE
 %token DOLLAR
@@ -60,6 +61,7 @@ json: string													{ printf("JSON TYPE: Simple string \n"); }
 	| json_generic										        { printf("JSON TYPE: Full Json\n"); }
 	| json_if
 	| json_for
+	| json_read
 	;
 
 json_generic: OPEN_CURL row_type json_body row_content CLOSE_CURL { printf("JSON TYPE: Full Json\n"); }
@@ -83,6 +85,12 @@ json_for: OPEN_CURL json_for_body CLOSE_CURL
 json_for_body: row_type_for COM row_var COM row_in COM row_content
 	;
 
+json_read: OPEN_CURL json_read_body CLOSE_CURL
+	;
+
+json_read_body: row_type_read COM row_var COM row_content
+	;
+
 /*************************************************************************************
 **                       TIPOS DE FILAS (ROWs) "":
 **************************************************************************************/
@@ -90,7 +98,10 @@ json_for_body: row_type_for COM row_var COM row_in COM row_content
 row_type_if: TAG_TYPE TPOINTS TAG_IF								{ printf("JSON TYPE IF ROW DETECTED\n"); }
 	;
 
-row_type_for: TAG_TYPE TPOINTS TAG_FOR							{ printf("JSON TYPE ROW FOR DETECTED\n"); }
+row_type_for: TAG_TYPE TPOINTS TAG_FOR								{ printf("JSON TYPE ROW FOR DETECTED\n"); }
+	;
+
+row_type_read: TAG_TYPE TPOINTS TAG_READ							{ printf("JSON TYPE ROW FOR DETECTED\n"); }
 	;
 
 row_type: TAG_TYPE TPOINTS string									{ printf("JSON TYPE ROW DETECTED\n"); }				
