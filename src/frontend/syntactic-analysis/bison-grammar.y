@@ -24,6 +24,9 @@
 %token TAG_CONDITION
 %token TAG_THEN
 %token TAG_ELSE
+%token TAG_FOR
+%token TAG_VAR
+%token TAG_IN
 
 %token QUOTE
 %token DOLLAR
@@ -56,6 +59,7 @@ json: string													{ printf("JSON TYPE: Simple string \n"); }
 	| array														{ printf("JSON TYPE: Array\n"); }
 	| json_generic										        { printf("JSON TYPE: Full Json\n"); }
 	| json_if
+	| json_for
 	;
 
 json_generic: OPEN_CURL row_type json_body row_content CLOSE_CURL { printf("JSON TYPE: Full Json\n"); }
@@ -73,6 +77,12 @@ json_if: OPEN_CURL json_if_body	CLOSE_CURL						{ printf("JSON IF THEN \n"); }
 json_if_body: row_type_if COM row_condition COM row_then           { printf("JSON IF BODY\n"); }
 	;
 
+json_for: OPEN_CURL json_for_body CLOSE_CURL
+	;
+
+json_for_body: row_type_for COM row_var COM row_in COM row_content
+	;
+
 /*************************************************************************************
 **                       TIPOS DE FILAS (ROWs) "":
 **************************************************************************************/
@@ -80,16 +90,25 @@ json_if_body: row_type_if COM row_condition COM row_then           { printf("JSO
 row_type_if: TAG_TYPE TPOINTS TAG_IF								{ printf("JSON TYPE IF ROW DETECTED\n"); }
 	;
 
+row_type_for: TAG_TYPE TPOINTS TAG_FOR							{ printf("JSON TYPE ROW FOR DETECTED\n"); }
+	;
+
 row_type: TAG_TYPE TPOINTS string									{ printf("JSON TYPE ROW DETECTED\n"); }				
 	;
 
-row_condition: TAG_CONDITION TPOINTS string						{ printf("JSON TYPE IF ROW DETECTED\n"); }
+row_condition: TAG_CONDITION TPOINTS string						{ printf("JSON CONDITION ROW DETECTED\n"); }
 	;
 
-row_then: TAG_THEN TPOINTS json									{ printf("JSON TYPE IF ROW DETECTED\n"); }
+row_then: TAG_THEN TPOINTS json									{ printf("JSON THEN ROW DETECTED\n"); }
 	;
 
-row_else: TAG_ELSE TPOINTS json									{ printf("JSON TYPE IF ROW DETECTED\n"); }
+row_else: TAG_ELSE TPOINTS json									{ printf("JSON ELSE ROW DETECTED\n"); }
+	;
+
+row_var: TAG_VAR TPOINTS string									{ printf("JSON VAR ROW DETECTED\n"); }
+	;
+
+row_in: TAG_IN TPOINTS string									{ printf("JSON IN ROW DETECTED\n"); }
 	;
 
 row_content: TAG_CONTENT TPOINTS json							{ printf("JSON CONTENT ROW DETECTED\n"); }
