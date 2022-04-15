@@ -59,19 +59,21 @@ json_body: COM
 	|	json_body row_generic COM								{ printf("JSON ROW ENUMERATION\n"); }
 	;
 
-json_if: json_if_body											{ printf("JSON IF THEN \n"); }
-	|	 json_if_body COM row_else								{ printf("JSON IF ELSE \n"); }
+json_if: OPEN_CURL json_if_body	CLOSE_CURL						{ printf("JSON IF THEN \n"); }
+	|	 OPEN_CURL json_if_body COM row_else CLOSE_CURL		{ printf("JSON IF ELSE \n"); }
 	;
 
-json_if_body: row_type COM row_condition COM row_then        { printf("JSON IF BODY\n"); }
+json_if_body: row_type_if COM row_condition COM row_then           { printf("JSON IF BODY\n"); }
 	;
 
 /*************************************************************************************
 **                       TIPOS DE FILAS (ROWs) "":
 **************************************************************************************/
 
-row_type: TAG_TYPE TPOINTS TAG_IF								{ printf("JSON TYPE IF ROW DETECTED\n"); }	
-	| TAG_TYPE TPOINTS string									{ printf("JSON TYPE ROW DETECTED\n"); }				
+row_type_if: TAG_TYPE TPOINTS TAG_IF								{ printf("JSON TYPE IF ROW DETECTED\n"); }
+	;
+
+row_type: TAG_TYPE TPOINTS string									{ printf("JSON TYPE ROW DETECTED\n"); }				
 	;
 
 row_condition: TAG_CONDITION TPOINTS string						{ printf("JSON TYPE IF ROW DETECTED\n"); }
