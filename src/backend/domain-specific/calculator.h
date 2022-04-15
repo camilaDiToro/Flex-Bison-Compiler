@@ -9,4 +9,16 @@ int Multiply(const int multiplicand, const int multiplier);
 
 int Divide(const int dividend, const int divisor);
 
+int Equals(const int dividend, const int divisor);
+
+int Nequals(const int dividend, const int divisor);
+
+int LessThan(const int dividend, const int divisor);
+
+int LessOrEqualTo(const int dividend, const int divisor);
+
+int GreaterThan(const int dividend, const int divisor);
+
+int GreaterOrEqualTo(const int dividend, const int divisor);
+
 #endif

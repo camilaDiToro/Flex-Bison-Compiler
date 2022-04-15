@@ -47,6 +47,36 @@ int DivisionExpressionGrammarAction(const int leftValue, const int rightValue) {
 	return Divide(leftValue, rightValue);
 }
 
+int EqualityExpressionGrammarAction(const int leftValue, const int rightValue) {
+	LogDebug("DivisionExpressionGrammarAction(%d, %d)", leftValue, rightValue);
+	return Equals(leftValue, rightValue);
+}
+
+int NequalityExpressionGrammarAction(const int leftValue, const int rightValue) {
+	LogDebug("DivisionExpressionGrammarAction(%d, %d)", leftValue, rightValue);
+	return Nequals(leftValue, rightValue);
+}
+
+int LessThanExpressionGrammarAction(const int leftValue, const int rightValue) {
+	LogDebug("DivisionExpressionGrammarAction(%d, %d)", leftValue, rightValue);
+	return LessThan(leftValue, rightValue);
+}
+
+int LessOrEqualToExpressionGrammarAction(const int leftValue, const int rightValue) {
+	LogDebug("DivisionExpressionGrammarAction(%d, %d)", leftValue, rightValue);
+	return LessOrEqualTo(leftValue, rightValue);
+}
+
+int GreaterThanExpressionGrammarAction(const int leftValue, const int rightValue) {
+	LogDebug("DivisionExpressionGrammarAction(%d, %d)", leftValue, rightValue);
+	return GreaterThan(leftValue, rightValue);
+}
+
+int GreaterOrEqualToExpressionGrammarAction(const int leftValue, const int rightValue) {
+	LogDebug("DivisionExpressionGrammarAction(%d, %d)", leftValue, rightValue);
+	return GreaterOrEqualTo(leftValue, rightValue);
+}
+
 int FactorExpressionGrammarAction(const int value) {
 	LogDebug("FactorExpressionGrammarAction(%d)", value);
 	return value;

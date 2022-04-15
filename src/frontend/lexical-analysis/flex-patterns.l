@@ -46,6 +46,14 @@ whitespace		[ \f\n\r\t\v]
 <MATH>"/"									{ return DIV; }
 <MATH>{alpha}{alphanumeric}*                { return VarMathPatternAction(yytext); }
 
+<MATH>"=="									{ return EQ; }
+<MATH>"!="									{ return NEQ; }
+<MATH>"<"									{ return LT; }
+<MATH>"<="									{ return LEQ; }
+<MATH>">"									{ return GT; }
+<MATH>">="									{ return GEQ; }
+
+
 <STRING>","                                 { return StringPatternAction(yytext); }
 ","                                         { return COM; }
 

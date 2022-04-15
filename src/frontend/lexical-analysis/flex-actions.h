@@ -25,6 +25,14 @@ typedef enum TokenID {
 	DIV,
 	VAR,
 
+	EQ,
+	NEQ,
+	LT,
+	LEQ,
+	GT,
+	GEQ,
+
+
 	// Tags
 	TAG_TYPE,
 	TAG_CONTENT, 

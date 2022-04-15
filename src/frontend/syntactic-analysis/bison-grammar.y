@@ -11,6 +11,13 @@
 %token DIV
 %token VAR
 
+%token EQ,
+%token NEQ,
+%token LT,
+%token LEQ,
+%token GT,
+%token GEQ,
+
 %token TAG_TYPE
 %token TAG_CONTENT
 %token TAG_IF
@@ -127,6 +134,12 @@ expression: expression ADD expression							{ $$ = AdditionExpressionGrammarActi
 	| expression SUB expression									{ $$ = SubtractionExpressionGrammarAction($1, $3); }
 	| expression MUL expression									{ $$ = MultiplicationExpressionGrammarAction($1, $3); }
 	| expression DIV expression									{ $$ = DivisionExpressionGrammarAction($1, $3); }
+	| expression EQ expression									{ $$ = EqualityExpressionGrammarAction($1, $3); }
+	| expression NEQ expression									{ $$ = NequalityExpressionGrammarAction($1, $3); }
+	| expression LT expression									{ $$ = LessThanExpressionGrammarAction($1, $3); }
+	| expression LEQ expression									{ $$ = LessOrEqualToExpressionGrammarAction($1, $3); }
+	| expression GT expression									{ $$ = GreaterThanExpressionGrammarAction($1, $3); }
+	| expression GEQ expression									{ $$ = GreaterOrEqualToExpressionGrammarAction($1, $3); }
 	| factor													{ $$ = FactorExpressionGrammarAction($1); }
 	;
 

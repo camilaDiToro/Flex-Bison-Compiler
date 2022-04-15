@@ -19,3 +19,27 @@ int Multiply(const int multiplicand, const int multiplier) {
 int Divide(const int dividend, const int divisor) {
 	return dividend / divisor;
 }
+
+int Equals(const int dividend, const int divisor) {
+	return dividend == divisor;
+}
+
+int Nequals(const int dividend, const int divisor) {
+	return dividend != divisor;
+}
+
+int LessThan(const int dividend, const int divisor) {
+	return dividend < divisor;
+}
+
+int LessOrEqualTo(const int dividend, const int divisor) {
+	return dividend <= divisor;
+}
+
+int GreaterThan(const int dividend, const int divisor) {
+	return dividend > divisor;
+}
+
+int GreaterOrEqualTo(const int dividend, const int divisor) {
+	return dividend >= divisor;
+}
