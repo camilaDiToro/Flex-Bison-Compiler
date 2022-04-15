@@ -29,6 +29,7 @@ typedef enum TokenID {
 	TAG_TYPE,
 	TAG_CONTENT, 
 	TAG_IF,
+	TAG_CONDITION,
 	TAG_THEN,
 	TAG_ELSE,
 

@@ -14,6 +14,7 @@
 %token TAG_TYPE
 %token TAG_CONTENT
 %token TAG_IF
+%token TAG_CONDITION
 %token TAG_THEN
 %token TAG_ELSE
 
@@ -46,25 +47,51 @@ program: json													{ $$ = ProgramGrammarAction($1); }
 
 json: string													{ printf("JSON TYPE: Simple string \n"); }
 	| array														{ printf("JSON TYPE: Array\n"); }
-	| json_full											        { printf("JSON TYPE: Full Json\n"); }
+	| json_generic										        { printf("JSON TYPE: Full Json\n"); }
+	| json_if
 	;
 
-json_full: OPEN_CURL json_type json_body json_content CLOSE_CURL { printf("JSON TYPE: Full Json\n"); }
+json_generic: OPEN_CURL row_type json_body row_content CLOSE_CURL { printf("JSON TYPE: Full Json\n"); }
 	; 
 
 json_body: COM
-	| 	json_row COM											{ printf("JSON ROW COLLECTION STARTED\n"); } 
-	|	json_body json_row COM									{ printf("JSON ROW ENUMERATION\n"); }
+	| 	row_generic COM											{ printf("JSON ROW COLLECTION STARTED\n"); } 
+	|	json_body row_generic COM								{ printf("JSON ROW ENUMERATION\n"); }
 	;
 
-json_type: TAG_TYPE TPOINTS json								{ printf("JSON TYPE ROW DETECTED\n"); }
+json_if: json_if_body											{ printf("JSON IF THEN \n"); }
+	|	 json_if_body COM row_else								{ printf("JSON IF ELSE \n"); }
 	;
 
-json_content: TAG_CONTENT TPOINTS json							{ printf("JSON CONTENT ROW DETECTED\n"); }
+json_if_body: row_type COM row_condition COM row_then        { printf("JSON IF BODY\n"); }
 	;
 
-json_row: string TPOINTS json									{ printf("JSON ROW DETECTED\n"); }
+/*************************************************************************************
+**                       TIPOS DE FILAS (ROWs) "":
+**************************************************************************************/
+
+row_type: TAG_TYPE TPOINTS TAG_IF								{ printf("JSON TYPE IF ROW DETECTED\n"); }	
+	| TAG_TYPE TPOINTS string									{ printf("JSON TYPE ROW DETECTED\n"); }				
 	;
+
+row_condition: TAG_CONDITION TPOINTS string						{ printf("JSON TYPE IF ROW DETECTED\n"); }
+	;
+
+row_then: TAG_THEN TPOINTS json									{ printf("JSON TYPE IF ROW DETECTED\n"); }
+	;
+
+row_else: TAG_ELSE TPOINTS json									{ printf("JSON TYPE IF ROW DETECTED\n"); }
+	;
+
+row_content: TAG_CONTENT TPOINTS json							{ printf("JSON CONTENT ROW DETECTED\n"); }
+	;
+
+row_generic: string TPOINTS json								{ printf("JSON ROW DETECTED\n"); }
+	;
+
+/*************************************************************************************
+**                       TIPOS BASICOS - STRING Y ARRAY
+**************************************************************************************/
 
 array: OPEN_BRA CLOSE_BRA										{ printf("PARSED EMPTY ARRAY\n"); }
 	|  OPEN_BRA array_body CLOSE_BRA							{ printf("PARSED NON EMPTY ARRAY\n");}
@@ -86,9 +113,14 @@ string_body: CHARS												{ CharsBodyStringGrammarAction(); }
 	| string_body expression_result								{ ConcatExpressionResultBodyStringGrammarAction(); }
 	;
 
+
+/*************************************************************************************
+**                       EXPRESIONES MATEMATICAS
+**************************************************************************************/
+
 expression_result:	START_MATH expression CLOSE_CURL      		{ ExpressionResultGrammarAction(); }
-
-
+	;
+	
 expression: expression ADD expression							{ $$ = AdditionExpressionGrammarAction($1, $3); }
 	| expression SUB expression									{ $$ = SubtractionExpressionGrammarAction($1, $3); }
 	| expression MUL expression									{ $$ = MultiplicationExpressionGrammarAction($1, $3); }

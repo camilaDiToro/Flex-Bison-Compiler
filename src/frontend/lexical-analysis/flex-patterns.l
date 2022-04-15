@@ -31,10 +31,11 @@ whitespace		[ \f\n\r\t\v]
 <MATH>"}"                                   {BEGIN(STRING); return EndMathAction(yytext);}
 
 "$"                                         { return DOLLAR; }
-":"                                         { printf("%s \n", yytext); return TPOINTS; }
-"\"@type\""                                 { printf("%s \n", yytext); return TAG_TYPE; }
-"\"@content\""                              { printf("%s \n", yytext); return TAG_CONTENT; }
-"\"@if\""                                   { printf("%s \n", yytext); return TAG_IF; }
+":"                                         { printf("tpoints: %s \n", yytext); return TPOINTS; }
+"\"@type\""                                 { printf("type: %s \n", yytext); return TAG_TYPE; }
+"\"@content\""                              { printf("content: %s \n", yytext); return TAG_CONTENT; }
+"\"@if\""                                   { printf("if: %s \n", yytext); return TAG_IF; }
+"\"@condition\""                            { printf("condition: %s \n", yytext); return TAG_CONDITION; }
 "\"@then\""                                 { printf("%s \n", yytext); return TAG_THEN; }
 "\"@else\""                                 { printf("%s \n", yytext); return TAG_ELSE; }
 
