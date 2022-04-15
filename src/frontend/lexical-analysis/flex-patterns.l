@@ -34,6 +34,9 @@ whitespace		[ \f\n\r\t\v]
 ":"                                         { printf("%s \n", yytext); return TPOINTS; }
 "\"@type\""                                 { printf("%s \n", yytext); return TAG_TYPE; }
 "\"@content\""                              { printf("%s \n", yytext); return TAG_CONTENT; }
+"\"@if\""                                   { printf("%s \n", yytext); return TAG_IF; }
+"\"@then\""                                 { printf("%s \n", yytext); return TAG_THEN; }
+"\"@else\""                                 { printf("%s \n", yytext); return TAG_ELSE; }
 
 
 <MATH>"+"									{ return ADD; }

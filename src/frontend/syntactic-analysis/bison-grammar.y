@@ -13,6 +13,9 @@
 
 %token TAG_TYPE
 %token TAG_CONTENT
+%token TAG_IF
+%token TAG_THEN
+%token TAG_ELSE
 
 %token QUOTE
 %token DOLLAR
@@ -43,25 +46,29 @@ program: json													{ $$ = ProgramGrammarAction($1); }
 
 json: string													{ printf("JSON TYPE: Simple string \n"); }
 	| array														{ printf("JSON TYPE: Array\n"); }
-	| OPEN_CURL json_body CLOSE_CURL 							{ printf("JSON TYPE: Full Json\n"); }												
+	| json_full											        { printf("JSON TYPE: Full Json\n"); }
 	;
 
+json_full: OPEN_CURL json_type json_body json_content CLOSE_CURL { printf("JSON TYPE: Full Json\n"); }
+	; 
 
-
-json_body: json_row												{ printf("JSON ROW COLLECTION STARTED\n"); }
-	|	json_body COM json_row									{ printf("JSON ROW ENUMERATION\n"); }
+json_body: COM
+	| 	json_row COM											{ printf("JSON ROW COLLECTION STARTED\n"); } 
+	|	json_body json_row COM									{ printf("JSON ROW ENUMERATION\n"); }
 	;
 
+json_type: TAG_TYPE TPOINTS json								{ printf("JSON TYPE ROW DETECTED\n"); }
+	;
+
+json_content: TAG_CONTENT TPOINTS json							{ printf("JSON CONTENT ROW DETECTED\n"); }
+	;
 
 json_row: string TPOINTS json									{ printf("JSON ROW DETECTED\n"); }
-	| TAG_CONTENT TPOINTS json									{ printf("JSON ROW DETECTED\n"); }
-	| TAG_TYPE TPOINTS json										{ printf("JSON ROW DETECTED\n"); }
 	;
 
 array: OPEN_BRA CLOSE_BRA										{ printf("PARSED EMPTY ARRAY\n"); }
 	|  OPEN_BRA array_body CLOSE_BRA							{ printf("PARSED NON EMPTY ARRAY\n");}
 	;
-
 
 array_body: json                                          		{ printf("body array json\n"); }
 	| array_body COM json                                       { printf("body array concat json\n"); }

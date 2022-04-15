@@ -28,6 +28,9 @@ typedef enum TokenID {
 	// Tags
 	TAG_TYPE,
 	TAG_CONTENT, 
+	TAG_IF,
+	TAG_THEN,
+	TAG_ELSE,
 
 	// Tokens de JSON
 	QUOTE,
