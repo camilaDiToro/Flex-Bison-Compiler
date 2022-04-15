@@ -11,6 +11,9 @@
 %token DIV
 %token VAR
 
+%token TAG_TYPE
+%token TAG_CONTENT
+
 %token QUOTE
 %token DOLLAR
 %token COM
@@ -43,12 +46,16 @@ json: string													{ printf("JSON TYPE: Simple string \n"); }
 	| OPEN_CURL json_body CLOSE_CURL 							{ printf("JSON TYPE: Full Json\n"); }												
 	;
 
+
+
 json_body: json_row												{ printf("JSON ROW COLLECTION STARTED\n"); }
 	|	json_body COM json_row									{ printf("JSON ROW ENUMERATION\n"); }
 	;
 
 
 json_row: string TPOINTS json									{ printf("JSON ROW DETECTED\n"); }
+	| TAG_CONTENT TPOINTS json									{ printf("JSON ROW DETECTED\n"); }
+	| TAG_TYPE TPOINTS json										{ printf("JSON ROW DETECTED\n"); }
 	;
 
 array: OPEN_BRA CLOSE_BRA										{ printf("PARSED EMPTY ARRAY\n"); }

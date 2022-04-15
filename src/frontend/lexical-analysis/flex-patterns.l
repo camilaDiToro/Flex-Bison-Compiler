@@ -31,8 +31,10 @@ whitespace		[ \f\n\r\t\v]
 <MATH>"}"                                   {BEGIN(STRING); return EndMathAction(yytext);}
 
 "$"                                         { return DOLLAR; }
-":"                                         { return TPOINTS; }
-"@"                                         { return AT_SIGN; }
+":"                                         { printf("%s \n", yytext); return TPOINTS; }
+"\"@type\""                                 { printf("%s \n", yytext); return TAG_TYPE; }
+"\"@content\""                              { printf("%s \n", yytext); return TAG_CONTENT; }
+
 
 <MATH>"+"									{ return ADD; }
 <MATH>"-"									{ return SUB; }

@@ -25,8 +25,9 @@ typedef enum TokenID {
 	DIV,
 	VAR,
 
-	// MISCELANEO 
-
+	// Tags
+	TAG_TYPE,
+	TAG_CONTENT, 
 
 	// Tokens de JSON
 	QUOTE,
