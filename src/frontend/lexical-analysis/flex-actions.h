@@ -32,6 +32,10 @@ typedef enum TokenID {
 	GT,
 	GEQ,
 
+	AND,
+	OR,
+	NOT,
+
 
 	// Tags
 	TAG_TYPE,

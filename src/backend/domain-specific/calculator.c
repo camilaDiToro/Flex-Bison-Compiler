@@ -20,26 +20,38 @@ int Divide(const int dividend, const int divisor) {
 	return dividend / divisor;
 }
 
-int Equals(const int dividend, const int divisor) {
-	return dividend == divisor;
+int Equals(const int leftFormula, const int rightFormula) {
+	return leftFormula == rightFormula;
 }
 
-int Nequals(const int dividend, const int divisor) {
-	return dividend != divisor;
+int Nequals(const int leftFormula, const int rightFormula) {
+	return leftFormula != rightFormula;
 }
 
-int LessThan(const int dividend, const int divisor) {
-	return dividend < divisor;
+int LessThan(const int leftFormula, const int rightFormula) {
+	return leftFormula < rightFormula;
 }
 
-int LessOrEqualTo(const int dividend, const int divisor) {
-	return dividend <= divisor;
+int LessOrEqualTo(const int leftFormula, const int rightFormula) {
+	return leftFormula <= rightFormula;
 }
 
-int GreaterThan(const int dividend, const int divisor) {
-	return dividend > divisor;
+int GreaterThan(const int leftFormula, const int rightFormula) {
+	return leftFormula > rightFormula;
 }
 
-int GreaterOrEqualTo(const int dividend, const int divisor) {
-	return dividend >= divisor;
+int GreaterOrEqualTo(const int leftFormula, const int rightFormula) {
+	return leftFormula >= rightFormula;
+}
+
+int And(const int leftFormula, const int rightFormula) {
+	return leftFormula && rightFormula;
+}
+
+int Or(const int leftFormula, const int rightFormula) {
+	return leftFormula || rightFormula;
+}
+
+int Not(const int formula) {
+	return !(formula);
 }

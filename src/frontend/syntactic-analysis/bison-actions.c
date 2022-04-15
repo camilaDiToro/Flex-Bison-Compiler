@@ -77,6 +77,21 @@ int GreaterOrEqualToExpressionGrammarAction(const int leftValue, const int right
 	return GreaterOrEqualTo(leftValue, rightValue);
 }
 
+int AndExpressionGrammarAction(const int leftValue, const int rightValue) {
+	LogDebug("AndExpressionGrammarAction(%d, %d)", leftValue, rightValue);
+	return And(leftValue, rightValue);
+}
+
+int OrExpressionGrammarAction(const int leftValue, const int rightValue) {
+	LogDebug("OrExpressionGrammarAction(%d, %d)", leftValue, rightValue);
+	return Or(leftValue, rightValue);
+}
+
+int NotExpressionGrammarAction(const int value) {
+	LogDebug("NotExpressionGrammarAction(%d)", value);
+	return Not(value);
+}
+
 int FactorExpressionGrammarAction(const int value) {
 	LogDebug("FactorExpressionGrammarAction(%d)", value);
 	return value;

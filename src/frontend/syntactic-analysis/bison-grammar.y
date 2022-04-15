@@ -18,6 +18,10 @@
 %token GT,
 %token GEQ,
 
+%token AND,
+%token OR,
+%token NOT,
+
 %token TAG_TYPE
 %token TAG_CONTENT
 %token TAG_IF
@@ -170,6 +174,9 @@ expression: expression ADD expression							{ $$ = AdditionExpressionGrammarActi
 	| expression LEQ expression									{ $$ = LessOrEqualToExpressionGrammarAction($1, $3); }
 	| expression GT expression									{ $$ = GreaterThanExpressionGrammarAction($1, $3); }
 	| expression GEQ expression									{ $$ = GreaterOrEqualToExpressionGrammarAction($1, $3); }
+	| expression AND expression									{ $$ = AndExpressionGrammarAction($1, $3); }
+	| expression OR expression									{ $$ = OrExpressionGrammarAction($1, $3); }
+	| NOT expression											{ $$ = NotExpressionGrammarAction($2); }
 	| factor													{ $$ = FactorExpressionGrammarAction($1); }
 	;
 

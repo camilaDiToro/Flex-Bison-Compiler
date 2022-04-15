@@ -53,6 +53,9 @@ whitespace		[ \f\n\r\t\v]
 <MATH>">"									{ return GT; }
 <MATH>">="									{ return GEQ; }
 
+<MATH>"&&"									{ return AND; }
+<MATH>"||"									{ return OR; }
+<MATH>"!"									{ return NOT; }
 
 <STRING>","                                 { return StringPatternAction(yytext); }
 ","                                         { return COM; }

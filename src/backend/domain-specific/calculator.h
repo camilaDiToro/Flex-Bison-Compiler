@@ -9,16 +9,22 @@ int Multiply(const int multiplicand, const int multiplier);
 
 int Divide(const int dividend, const int divisor);
 
-int Equals(const int dividend, const int divisor);
+int Equals(const int leftFormula, const int rightFormula);
 
-int Nequals(const int dividend, const int divisor);
+int Nequals(const int leftFormula, const int rightFormula);
 
-int LessThan(const int dividend, const int divisor);
+int LessThan(const int leftFormula, const int rightFormula);
 
-int LessOrEqualTo(const int dividend, const int divisor);
+int LessOrEqualTo(const int leftFormula, const int rightFormula);
 
-int GreaterThan(const int dividend, const int divisor);
+int GreaterThan(const int leftFormula, const int rightFormula);
 
-int GreaterOrEqualTo(const int dividend, const int divisor);
+int GreaterOrEqualTo(const int leftFormula, const int rightFormula);
+
+int And(const int leftFormula, const int rightFormula);
+
+int Or(const int leftFormula, const int rightFormula);
+
+int Not(const int formula);
 
 #endif
