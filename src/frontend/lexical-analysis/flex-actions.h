@@ -48,6 +48,7 @@ typedef enum TokenID {
 	TAG_VAR,
 	TAG_IN,
 	TAG_READ,
+	TAG_INRANGE,
 
 	// Tokens de JSON
 	QUOTE,
@@ -69,7 +70,8 @@ typedef enum TokenID {
 	CHARS,
 
 	// Comienzo o finalizacion de contextos
-	START_MATH
+	START_MATH,
+	END_MATH
 
 } TokenID;
 

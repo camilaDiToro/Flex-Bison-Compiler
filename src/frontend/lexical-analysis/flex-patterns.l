@@ -19,7 +19,7 @@ digit			[0-9]
 endline			\n
 alpha           [a-zA-Z]
 alphanumeric    [a-zA-Z0-9]
-character       [a-zA-Z0-9]|@|-|\+|\*|\/|\'|\{|\}|\[|\]
+character       [^\f\n\r\t\v\"$]|\\\\$|\\\"
 whitespace		[ \f\n\r\t\v]
 
 %s STRING
@@ -30,7 +30,6 @@ whitespace		[ \f\n\r\t\v]
 <STRING>"${"                                {BEGIN(MATH); return StartMathAction(yytext);}
 <MATH>"}"                                   {BEGIN(STRING); return EndMathAction(yytext);}
 
-"$"                                         { return DOLLAR; }
 ":"                                         { printf("tpoints: %s \n", yytext); return TPOINTS; }
 "\"@type\""                                 { printf("type: %s \n", yytext); return TAG_TYPE; }
 "\"@content\""                              { printf("content: %s \n", yytext); return TAG_CONTENT; }
@@ -38,7 +37,11 @@ whitespace		[ \f\n\r\t\v]
 "\"@condition\""                            { printf("condition: %s \n", yytext); return TAG_CONDITION; }
 "\"@then\""                                 { printf("%s \n", yytext); return TAG_THEN; }
 "\"@else\""                                 { printf("%s \n", yytext); return TAG_ELSE; }
-
+"\"@for\""                                  { printf("%s \n", yytext); return TAG_FOR; }
+"\"@var\""                                  { printf("%s \n", yytext); return TAG_VAR; }
+"\"@in\""                                   { printf("%s \n", yytext); return TAG_IN; }
+"\"@read\""                                 { printf("%s \n", yytext); return TAG_READ; }
+"\"@inrange\""                              { printf("%s \n", yytext); return TAG_INRANGE; }
 
 <MATH>"+"									{ return ADD; }
 <MATH>"-"									{ return SUB; }

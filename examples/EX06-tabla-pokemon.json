@@ -11,17 +11,17 @@
         },
         {
             "@type": "h3", 
-            "@content": "Correr el siguiente comando y pipearlo con el ejecutable generado en compilación"
+            "@content": "Correr el siguiente comando y pipearlo con el ejecutable generado en compilacion"
         }, 
         {
             "@type": "p", 
-            "@content": "for i in {1..10}; do curl --location --request GET https://pokeapi.co/api/v2/pokemon/$i | jq -r '.name' >> pkmn ; done; cat pkmn; rm pkmn"
+            "@content": "for i in {1..10}; do curl --location --request GET https://pokeapi.co/api/v2/pokemon/\\$i | jq -r '.name' >> pkmn ; done; cat pkmn; rm pkmn"
         },
         {
             "@type": "table", 
             "@content": {
                 "@type": "@for", 
-                "@inrange": ["1", "10"], 
+                "@inrange": ["1","10"], 
                 "@content": {
                     "@type": "tr", 
                     "@content": {

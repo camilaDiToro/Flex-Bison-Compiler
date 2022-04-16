@@ -48,7 +48,7 @@ TokenID StartMathAction(const char * lexeme){
 
 TokenID EndMathAction(const char * lexeme){
 	LogDebug("EndMathAction: '%s'.", lexeme);
-	return CLOSE_CURL;
+	return END_MATH;
 }
 
 TokenID VarMathPatternAction(const char * lexeme){

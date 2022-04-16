@@ -11,16 +11,16 @@
 %token DIV
 %token VAR
 
-%token EQ,
-%token NEQ,
-%token LT,
-%token LEQ,
-%token GT,
-%token GEQ,
+%token EQ
+%token NEQ
+%token LT
+%token LEQ
+%token GT
+%token GEQ
 
-%token AND,
-%token OR,
-%token NOT,
+%token AND
+%token OR
+%token NOT
 
 %token TAG_TYPE
 %token TAG_CONTENT
@@ -32,6 +32,7 @@
 %token TAG_VAR
 %token TAG_IN
 %token TAG_READ
+%token TAG_INRANGE
 
 %token QUOTE
 %token DOLLAR
@@ -50,6 +51,7 @@
 %token CHARS
 
 %token START_MATH
+%token END_MATH
 
 // Reglas de asociatividad y precedencia (de menor a mayor):
 %left ADD SUB
@@ -87,6 +89,8 @@ json_for: OPEN_CURL json_for_body CLOSE_CURL
 	;
 
 json_for_body: row_type_for COM row_var COM row_in COM row_content
+	|   row_type_for COM row_var COM row_inrange COM row_content
+	|	row_type_for COM row_inrange COM row_content
 	;
 
 json_read: OPEN_CURL json_read_body CLOSE_CURL
@@ -123,7 +127,10 @@ row_else: TAG_ELSE TPOINTS json									{ printf("JSON ELSE ROW DETECTED\n"); }
 row_var: TAG_VAR TPOINTS string									{ printf("JSON VAR ROW DETECTED\n"); }
 	;
 
-row_in: TAG_IN TPOINTS string									{ printf("JSON IN ROW DETECTED\n"); }
+row_in: TAG_IN TPOINTS array									{ printf("JSON IN ROW DETECTED\n"); }
+	;
+
+row_inrange: TAG_INRANGE TPOINTS OPEN_BRA string COM string CLOSE_BRA { printf("JSON INRANGE ROW DETECTED\n"); }
 	;
 
 row_content: TAG_CONTENT TPOINTS json							{ printf("JSON CONTENT ROW DETECTED\n"); }
@@ -161,7 +168,7 @@ string_body: CHARS												{ CharsBodyStringGrammarAction(); }
 **                       EXPRESIONES MATEMATICAS
 **************************************************************************************/
 
-expression_result:	START_MATH expression CLOSE_CURL      		{ ExpressionResultGrammarAction(); }
+expression_result:	START_MATH expression END_MATH      		{ ExpressionResultGrammarAction(); }
 	;
 	
 expression: expression ADD expression							{ $$ = AdditionExpressionGrammarAction($1, $3); }

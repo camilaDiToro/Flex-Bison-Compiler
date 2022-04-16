@@ -17,7 +17,7 @@
                 "@content": {
                     "@type": "@for", 
                     "@var": "i", 
-                    "@inrange": ["1", "2"],
+                    "@inrange": ["1","2"],
                     "@content": "${ music + i}"
                 }
             }
