@@ -30,18 +30,18 @@ whitespace		[ \f\n\r\t\v]
 <STRING>"${"                                {BEGIN(MATH); return StartMathAction(yytext);}
 <MATH>"}"                                   {BEGIN(STRING); return EndMathAction(yytext);}
 
-":"                                         { printf("tpoints: %s \n", yytext); return TPOINTS; }
-"\"@type\""                                 { printf("type: %s \n", yytext); return TAG_TYPE; }
-"\"@content\""                              { printf("content: %s \n", yytext); return TAG_CONTENT; }
-"\"@if\""                                   { printf("if: %s \n", yytext); return TAG_IF; }
-"\"@condition\""                            { printf("condition: %s \n", yytext); return TAG_CONDITION; }
-"\"@then\""                                 { printf("%s \n", yytext); return TAG_THEN; }
-"\"@else\""                                 { printf("%s \n", yytext); return TAG_ELSE; }
-"\"@for\""                                  { printf("%s \n", yytext); return TAG_FOR; }
-"\"@var\""                                  { printf("%s \n", yytext); return TAG_VAR; }
-"\"@in\""                                   { printf("%s \n", yytext); return TAG_IN; }
-"\"@read\""                                 { printf("%s \n", yytext); return TAG_READ; }
-"\"@inrange\""                              { printf("%s \n", yytext); return TAG_INRANGE; }
+":"                                         { return TPOINTS; }
+"\"@type\""                                 { return TAG_TYPE; }
+"\"@content\""                              { return TAG_CONTENT; }
+"\"@if\""                                   { return TAG_IF; }
+"\"@condition\""                            { return TAG_CONDITION; }
+"\"@then\""                                 { return TAG_THEN; }
+"\"@else\""                                 { return TAG_ELSE; }
+"\"@for\""                                  { return TAG_FOR; }
+"\"@var\""                                  { return TAG_VAR; }
+"\"@in\""                                   { return TAG_IN; }
+"\"@read\""                                 { return TAG_READ; }
+"\"@inrange\""                              { return TAG_INRANGE; }
 
 <MATH>"+"									{ return ADD; }
 <MATH>"-"									{ return SUB; }

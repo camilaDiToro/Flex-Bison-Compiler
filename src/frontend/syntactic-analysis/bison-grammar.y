@@ -64,13 +64,14 @@ program: json													{ $$ = ProgramGrammarAction($1); }
 
 json: string													{ printf("JSON TYPE: Simple string \n"); }
 	| array														{ printf("JSON TYPE: Array\n"); }
-	| json_generic										        { printf("JSON TYPE: Full Json\n"); }
-	| json_if
-	| json_for
-	| json_read
+	| json_generic										        { printf("JSON TYPE: Generic\n"); }
+	| json_if													{ printf("JSON TYPE: If\n"); }
+	| json_for													{ printf("JSON TYPE: For\n"); }
+	| json_read													{ printf("JSON TYPE: Read\n"); }
 	;
 
-json_generic: OPEN_CURL row_type json_body row_content CLOSE_CURL { printf("JSON TYPE: Full Json\n"); }
+json_generic: 	OPEN_CURL row_type json_body 
+				row_content CLOSE_CURL 							{ printf("JSON TYPE: Generic\n"); }
 	; 
 
 json_body: COM
@@ -79,40 +80,40 @@ json_body: COM
 	;
 
 json_if: OPEN_CURL json_if_body	CLOSE_CURL						{ printf("JSON IF THEN \n"); }
-	|	 OPEN_CURL json_if_body COM row_else CLOSE_CURL		{ printf("JSON IF ELSE \n"); }
+	|	 OPEN_CURL json_if_body COM row_else CLOSE_CURL			{ printf("JSON IF ELSE \n"); }
 	;
 
-json_if_body: row_type_if COM row_condition COM row_then           { printf("JSON IF BODY\n"); }
+json_if_body: row_type_if COM row_condition COM row_then        { printf("JSON IF BODY\n"); }
 	;
 
-json_for: OPEN_CURL json_for_body CLOSE_CURL
+json_for: OPEN_CURL json_for_body CLOSE_CURL        			{ printf("JSON TYPE: For\n"); }
 	;
 
-json_for_body: row_type_for COM row_var COM row_in COM row_content
-	|   row_type_for COM row_var COM row_inrange COM row_content
-	|	row_type_for COM row_inrange COM row_content
+json_for_body: row_type_for COM row_var COM row_in COM row_content	{ printf("JSON FOR VAR IN BODY\n"); }
+	|   row_type_for COM row_var COM row_inrange COM row_content	{ printf("JSON FOR VAR INRANGE BODY\n"); }
+	|	row_type_for COM row_inrange COM row_content				{ printf("JSON FOR INRANGE BODY\n"); }
 	;
 
-json_read: OPEN_CURL json_read_body CLOSE_CURL
+json_read: OPEN_CURL json_read_body CLOSE_CURL					{ printf("JSON TYPE: Read\n"); }
 	;
 
-json_read_body: row_type_read COM row_var COM row_content
+json_read_body: row_type_read COM row_var COM row_content		{ printf("JSON READ BODY\n"); }
 	;
 
 /*************************************************************************************
 **                       TIPOS DE FILAS (ROWs) "":
 **************************************************************************************/
 
-row_type_if: TAG_TYPE TPOINTS TAG_IF								{ printf("JSON TYPE IF ROW DETECTED\n"); }
+row_type_if: TAG_TYPE TPOINTS TAG_IF							{ printf("JSON TYPE IF ROW DETECTED\n"); }
 	;
 
-row_type_for: TAG_TYPE TPOINTS TAG_FOR								{ printf("JSON TYPE ROW FOR DETECTED\n"); }
+row_type_for: TAG_TYPE TPOINTS TAG_FOR							{ printf("JSON TYPE ROW FOR DETECTED\n"); }
 	;
 
-row_type_read: TAG_TYPE TPOINTS TAG_READ							{ printf("JSON TYPE ROW FOR DETECTED\n"); }
+row_type_read: TAG_TYPE TPOINTS TAG_READ						{ printf("JSON TYPE ROW FOR DETECTED\n"); }
 	;
 
-row_type: TAG_TYPE TPOINTS string									{ printf("JSON TYPE ROW DETECTED\n"); }				
+row_type: TAG_TYPE TPOINTS string								{ printf("JSON TYPE ROW DETECTED\n"); }				
 	;
 
 row_condition: TAG_CONDITION TPOINTS string						{ printf("JSON CONDITION ROW DETECTED\n"); }
@@ -130,7 +131,8 @@ row_var: TAG_VAR TPOINTS string									{ printf("JSON VAR ROW DETECTED\n"); }
 row_in: TAG_IN TPOINTS array									{ printf("JSON IN ROW DETECTED\n"); }
 	;
 
-row_inrange: TAG_INRANGE TPOINTS OPEN_BRA string COM string CLOSE_BRA { printf("JSON INRANGE ROW DETECTED\n"); }
+row_inrange: 	TAG_INRANGE TPOINTS OPEN_BRA string 
+				COM string CLOSE_BRA 							{ printf("JSON INRANGE ROW DETECTED\n"); }
 	;
 
 row_content: TAG_CONTENT TPOINTS json							{ printf("JSON CONTENT ROW DETECTED\n"); }
