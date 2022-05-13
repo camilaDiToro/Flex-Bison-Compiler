@@ -19,6 +19,17 @@ typedef struct SymbolTable {
     struct SymbolTable * previousTable; 
 } SymbolTable; 
 
+SymbolEntry * newSymbol(char * name, char * value, SymbolType type); 
+void printSymbolEntry(SymbolEntry * entry); 
+void printSymbolEntryList(SymbolEntry * entry); 
+SymbolEntry * getSymbolWithKey(SymbolEntry * entry, char * key); 
+
+SymbolTable * newScope(SymbolTable * previousTable); 
+SymbolTable * newEmptySymbolTable(); 
+void printSymbolTable(SymbolTable * table);
+void addSymbolToTable(SymbolTable * table, SymbolEntry * entry); 
+SymbolEntry * getEntryFromTable(SymbolTable * table, char * key); 
+
 // Pure, simple, symbol manipulation
 
 SymbolEntry * newSymbol(char * name, char * value, SymbolType type) {
@@ -30,7 +41,10 @@ SymbolEntry * newSymbol(char * name, char * value, SymbolType type) {
 }
 
 void printSymbolEntry(SymbolEntry * entry) {
-    printf("<%10s, %20s, %15s >\n", entry->key, entry->value, entry->type == INT ? "type:int" : "type:string"); 
+    if (entry == NULL)
+        printf("<%10s, %20s, %15s >\n", "NONE", "NONE", "NONE"); 
+    else 
+        printf("<%10s, %20s, %15s >\n", entry->key, entry->value, entry->type == INT ? "type:int" : "type:string"); 
 }
 
 void printSymbolEntryList(SymbolEntry * entry) {
@@ -123,7 +137,7 @@ int main() {
 
     printSymbolTable(table); 
     
-    SymbolEntry * res = getEntryFromTable(table, "j"); 
+    SymbolEntry * res = getEntryFromTable(table, "popo"); 
     printSymbolEntry(res); 
     return 0; 
 }
